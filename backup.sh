@@ -19,7 +19,7 @@ PGRESTOREBIN="$(which pg_restore)"
 EGREPBIN="$(which egrep)"
 PGSQL="sudo -u postgres ${PGSQLBIN} -U postgres"
 PGDUMPCMD="sudo -u postgres ${PGSQLDUMPBIN} -U postgres -F c -Z 9 -x -E UTF8 -b"
-PGRESTORE="sudo -u postgres ${PGSQLRESTOREBIN} -U postgres"
+PGRESTORE="sudo -u postgres ${PGRESTOREBIN} -U postgres"
 CULLKEEPFOR=${KEEPFOR-"30"}
 PID=$$
 
@@ -118,7 +118,7 @@ cleanup () {
 
 restoreDB () {
     msg "Restoring ${RESTOREFILE} to ${DBNAME}" 0
-    ${PGRESTORE} -d "${DBNAME}" "${RESTOREFILE}"
+    ${PGRESTORE} --create "${RESTOREFILE}"
     if [ "$?" -ne 0 ]; then
         msg "FAILED" 1
         echo "Failed to restore ${RESTOREFILE} to ${DBNAME}" >&2
@@ -155,7 +155,6 @@ case "${CMD}" in
             else
                 DBNAME="$3"
             fi
-            exit 1
         else
             echo "Please specify destination db"
             exit 1
