@@ -118,7 +118,7 @@ cleanup () {
 
 restoreDB () {
     msg "Restoring ${RESTOREFILE} to ${DBNAME}" 0
-    ${PGRESTORE} --create "${RESTOREFILE}"
+    ${PGRESTORE} -d "${DBNAME}" "${RESTOREFILE}"
     if [ "$?" -ne 0 ]; then
         msg "FAILED" 1
         echo "Failed to restore ${RESTOREFILE} to ${DBNAME}" >&2
