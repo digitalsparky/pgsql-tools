@@ -2,7 +2,7 @@
 
 ```
 PgSQL Backup Script
-Usage: $0 [--help|--clean|--backup|--restore]
+Usage: backup.sh [--help|--clean|--backup|--restore]
 --clean: Run's backup cull/cleanup job
 --backup [database]: Runs backup job (leave 'database' variable to run all)
 --restore [restorefile] [newdatabase]: Restore's an archive to the new database name
